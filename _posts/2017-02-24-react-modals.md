@@ -55,7 +55,7 @@ That's it! That's the skeleton of a basic modal. However, the real challenge is 
     Important: The rest of this post will assume you have a solid grasp of how components are often structured in react with redux (and react-redux).
 </div>
 
-If you checked out the suggested links at the top of this post, you may be feeling what I did when I first tried to understand what they were talking about. Huh? As a beginner, it only raised a host of questions like, 'So where do I put the ModalRoot in my routes?', 'How should I connect it with my redux store?', 'Can I customize the default template modals?', so on and so forth...
+If you are anything like me, checking out the links above might have led to more confusion.
 
 Here is what I want my modal to do (and what you probably want as well!):
 1. <strong>Reusable</strong> - <em>I don't want to create the HTML/CSS for every modal I put into my app. Who does?</em>
@@ -144,13 +144,11 @@ Anyways, if you look at the image above, the App component is the parent to the 
 
 > <img src="http://i.imgur.com/BpHMG9P.png">
 
-I am using `react-router` here... and ignore my other routes. The main point is that the App component is the parent component to everything else!
+I am using `react-router` here.
 
 Next, all the routes are connected to the redux store via the `Provider` (react-redux) as follows:
 
 > <img src="http://i.imgur.com/1CQPpc6.png" width="50%" height="50%">
-
-This way, you shouldn't have to modify your routes in any way, you do not have to touch the `ReactDOM.render` in your index.js (or wherever you are connecting your app to the redux store). You only have to add a single line in your parent App component!
 
 Lastly, we have to create some actions and a reducer to handle those actions in the store!
 
@@ -183,8 +181,8 @@ Bringing this together involves two things (1) creating your presentational moda
 > <img src="http://i.imgur.com/5DladXJ.png" width="100%" height="70%">
 
 There a few important things to note here:
-* First, we are importing in the <strong>default Modal component</strong> we created in Step 1 of this blog. Just like any other React component, it can be reused anywhere! We will be rendering the Modal component and within it, the specific content of the modal - here, the login form!
-* Second, we have an <strong>onClose</strong> method defined here. Remember earlier I said this has to be passed in as a prop to the default Modal component for it to trigger the different methods to exit out of the modal (e.g., <strong>onOverlayClick</strong>). It is inside this onClose method that we will pass in our <strong>hideModal</strong> action-creator to set the store's modalType to `null` (which triggers the ModalContainer to render out no presentational component -- `if (!props.modalType) return null`).
+* First, we are importing in the <strong>default Modal component</strong> we created in Step 1 of this blog.
+* Second, we have an <strong>onClose</strong> method defined here. Remember earlier I said this has to be passed in as a prop to the default Modal component for it to trigger the different methods to exit out of the modal (e.g., <strong>onOverlayClick</strong>). It is inside this onClose method that we will pass in our <strong>hideModal</strong> action-creator to set the store's modalType to `null`.
 
 <strong>2. Login Button!</strong>
 
@@ -202,7 +200,7 @@ Here we see a very basic navigation bar for our app. It only contains a single L
 
 Here, we see how the presentational component receives the <strong>showLoginMenu</strong> method. We imported the <strong>loadModal</strong> action-creator and will invoke it within the <strong>showLoginMenu</strong> method inside the NavBar Container <strong>with</strong> the LOGIN_MODAL modalType! 
 
-This is very important. We are saying that once the button is clicked in our presentational component, it will dispatch the <strong>loadModal</strong> action to the store with the LOGIN_MODAL modalType. It will set the store's modalType to `LOGIN_MODAL` and will trigger the ModalContainer to render the LoginModal via `const SpecificModal = MODAL_COMPONENTS[props.modalType]`!
+This is very important. We are saying that once the button is clicked in our presentational component, it will set the store's modalType to `LOGIN_MODAL` and will trigger the ModalContainer to render the LoginModal via `const SpecificModal = MODAL_COMPONENTS[props.modalType]`!
 
 Now, if you click on that Login button, you will get your Login Modal popping up on your screen! If you click outside the modal or press 'ESC' it exits the modal too! Cool!
 
