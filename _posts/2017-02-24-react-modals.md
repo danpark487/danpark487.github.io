@@ -178,7 +178,7 @@ Almost done!
 
 Bringing this together involves two things (1) creating your presentational modal component and (2) triggering the <strong>showModal</strong> action somewhere in our app (think: a Login button)!
 
-"1." Basic Login Modal Component
+<strong>1. Basic Login Modal Component</strong>
 
 > <img src="http://i.imgur.com/5DladXJ.png" width="100%" height="70%">
 
@@ -186,7 +186,7 @@ There a few important things to note here:
 * First, we are importing in the <strong>default Modal component</strong> we created in Step 1 of this blog. Just like any other React component, it can be reused anywhere! We will be rendering the Modal component and within it, the specific content of the modal - here, the login form!
 * Second, we have an <strong>onClose</strong> method defined here. Remember earlier I said this has to be passed in as a prop to the default Modal component for it to trigger the different methods to exit out of the modal (e.g., <strong>onOverlayClick</strong>). It is inside this onClose method that we will pass in our <strong>hideModal</strong> action-creator to set the store's modalType to `null` (which triggers the ModalContainer to render out no presentational component -- `if (!props.modalType) return null`).
 
-"2." Login Button!
+<strong>2. Login Button!</strong>
 
 <div class="message">
     If you have separated your presentational components from your container components react-redux style, then what follows below will make sense. If you are unfamiliar with the presentation-container divide, the presentational component is merely receiving props from the container and handles all rendering.
