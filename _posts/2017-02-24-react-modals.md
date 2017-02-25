@@ -7,23 +7,23 @@ title: React Modals -- Scalable? Customizable? Neat Components?
 
 If you haven't tried to implement modals in React, you wouldn't understand the context of this blog. If you had, there is a chance you have wandered into some random novice JS developer's blog (I'm talking about this one) because, quite frankly... there isn't a whole lot of guidance re: modals in react. Of course, this isn't to say that there aren't ANY good resources on the subject out there... I certainly wouldn't have gotten to where I am now without them. However, I found their implementations confusing (for a beginner like myself), conflicting, and/or vague.
 
-BUT! Here are a collection of a few gems that I have found -- where the rest of my blog is based heavily upon:
+BUT! Here is a collection of a few gems that I have found -- where the rest of my blog is based heavily upon:
 * <a href="http://stackoverflow.com/questions/35623656/how-can-i-display-a-modal-dialog-in-redux-that-performs-asynchronous-actions/35641680">StackOverflow: Dan Abramov's answer on how to implement modals with redux</a>
 * <a href="https://codersmind.com/scalable-modals-react-redux/">Scalable Modals with React and Redux</a>
 * <a href="https://medium.com/@david.gilbertson/modals-in-react-f6c3ff9f4701#.rrwqgz9e6">Modals in React</a>
 * <a href="https://www.youtube.com/watch?v=WGjv-p9jYf0">Youtube: [React] Modals in React and Redux Apps</a>
 
-I recommend you checking out those links -- but you don't have to.
+I recommend checking out those links -- but you don't have to.
 
 It is mainly to prove a point... modals in React are a pain to implement... even if you use a library like <a href="https://github.com/reactjs/react-modal">`react-modal`</a> (sometimes there is too much abstraction).
 
 ### <strong>Basics - What are modals?</strong>
 
 <div class="message">
-  Note: if you already understand what modals are, and want to get to the meat of this post, then scroll down!
+  Note: if you already understand what modals are, and want to get to the meat of this post, then scroll past this section!
 </div>
 
-In layman's terms, modals are simply pop-up messages that you often see being used for Login/Registration, TOS, warning, etc. messages.
+In layman's terms, modals are simply pop-up messages that you often see being used for Login/Registration, TOS, warning, etc.
 
 For example:
 > <img src="https://cdn-images-1.medium.com/max/800/1*5s21EnFDMOklJr8T9KIp2Q.png" width="75%" height="50%">
@@ -31,7 +31,7 @@ For example:
 You've definitely seen these before and if you are anything like me, you might've even tried to implement one in a website.
 
 <div class="message">
-  For the purposes of this blog post, I will only be speaking about modals in <strong>React</strong>. I would not be surprised if it were easier to do in Angular, or some other framework.
+  For the purposes of this blog post, I will only be speaking about modals in <strong>React</strong>. I wouldn't be surprised if it were easier to do in Angular, or some other framework.
 </div>
 
 In short, modals are simply "hacky" HTML/CSS views combined with some event-handlers.
@@ -39,7 +39,7 @@ In short, modals are simply "hacky" HTML/CSS views combined with some event-hand
 I write "hacky" in quotes because messing around with HTML and CSS seems like something we shouldn't do much of in React. But with modals, it's <strong>unavoidable</strong>. If you <strong>hate</strong> CSS, turn around and forget about modals altogether before it's too late. But remember, you will never have a cool login pop-up suited to your design tastes. :)
 
 <strong>Back on topic:</strong>
-Modals are a rendering of some HTML elements with certain CSS classes <em>triggered</em> by some event-handler on a button, link, or whatever. Basically, you click a button, the pop-up is rendered on your screen! The magic is that the website you were just on does not go away! You can still see the page you were just on behind the pop-up! 
+Modals are a rendering of some HTML elements with certain CSS classes <em>triggered</em> by some event-handler on a button, link, or whatever. Basically, you click a button, the pop-up is rendered on your screen! The magic is that the website you were just on does not go away! You can still see the page behind the pop-up! 
 
 There are three major HTML elements rendered when the modal pops up:
 1. An <strong>Overlay</strong> - typically a `<div>` element with a class that creates a "shadow" effect over the document while the modal is onscreen.
@@ -55,10 +55,10 @@ That's it! That's the skeleton of a basic modal. However, the real challenge is 
     Important: The rest of this post will assume you have a solid grasp of how components are often structured in react with redux (and react-redux).
 </div>
 
-If you checked out the suggested links at the top of this post, you may be feeling what I did when I first tried to understand what they were talking about. Huh? As a beginner, it only raised a host of questions like, 'So where do I put the ModalRoot in my routes?', 'How should I connect it with my redux store?', 'Can I customize the default template modals?', and so on and so forth...
+If you checked out the suggested links at the top of this post, you may be feeling what I did when I first tried to understand what they were talking about. Huh? As a beginner, it only raised a host of questions like, 'So where do I put the ModalRoot in my routes?', 'How should I connect it with my redux store?', 'Can I customize the default template modals?', so on and so forth...
 
 Here is what I want my modal to do (and what you probably want as well!):
-1. <strong>Reusable</strong> - <em>I do not want to create the HTML/CSS for every modal I put into my app. Who does?</em>
+1. <strong>Reusable</strong> - <em>I don't want to create the HTML/CSS for every modal I put into my app. Who does?</em>
 2. <strong>Scalable</strong> - <em>I want my modals to be rendered from a centralized location for organization purposes.</em>
 3. <strong>Redux-ified</strong> - <em>I want to connect my modal to my redux store because I may want to pass props down.</em>
 4. <strong>Customizable</strong> - <em>I don't want all my modals to look the same.</em>
@@ -72,7 +72,7 @@ You could import in a nice package like <a href="https://github.com/reactjs/reac
 > There is a lot of boilerplate that you can just copy and paste, but I will explain why the boilerplate is important!
 
 * You will need to create a class for your default Modal component.
-> <img src="http://i.imgur.com/FOYy6D2.png" width="100%" height="70%">
+> <img src="http://i.imgur.com/FOYy6D2.png" width="100%" height="90%">
 
 The rendered portion of the default Modal component is what I mentioned earlier, namely the three HTML elements (Overlay, Content Box, Dialog Box) and their CSS classes that render the Modal. 
 
@@ -118,7 +118,7 @@ The following code will do just that!
 
 At first glance, this may be a bit confusing, but we will take it step by step. It is also difficult to read and understand this snippet without the proper context (e.g., what is being passed in, where are all these things located).
 
-Things to note:
+<strong>Things to note:</strong>
 1. We are importing all the unique modal components into this container! (e.g., LoginModal, WarningModal, etc.)
 2. We have constants imported in for all the different modal types because this Modal Container is connected to the store and will be receiving a prop as `props.modalType` (via `mapStateToProps`) to figure out which modal to render.
 3. The MODAL_COMPONENTS object maps each modal component to their respective modalType (from the redux store).
@@ -150,7 +150,7 @@ Next, all the routes are connected to the redux store via the `Provider` (react-
 
 > <img src="http://i.imgur.com/1CQPpc6.png" width="50%" height="50%">
 
-This way, you should not have to modify your routes in any way, you do not have to touch the `ReactDOM.render` in your index.js (or wherever you are connecting your app to the redux store). You only have to add a single line in your parent App component!
+This way, you shouldn't have to modify your routes in any way, you do not have to touch the `ReactDOM.render` in your index.js (or wherever you are connecting your app to the redux store). You only have to add a single line in your parent App component!
 
 Lastly, we have to create some actions and a reducer to handle those actions in the store!
 
@@ -160,9 +160,9 @@ There are only <strong>two</strong> must-have actions you have to set up for you
 
 > I am using thunk middleware for my redux store (but you don't need it, or have to know anything about it... I'm just using it for my app).
 
-1. <strong>SHOW MODAL</strong> - takes in a modalType to set the modalType in the store.
+1. <strong>SHOW_MODAL</strong> - takes in a modalType to set the modalType in the store.
 
-2. <strong>HIDE MODAL</strong> - simply an action that will set the modalType to `null` in the store.
+2. <strong>HIDE_MODAL</strong> - simply an action that will set the modalType to `null` in the store.
 
 > <img src="http://i.imgur.com/vxXcAPG.png" width="80%" height="80%">
 
@@ -178,7 +178,7 @@ Almost done!
 
 Bringing this together involves two things (1) creating your presentational modal component and (2) triggering the <strong>showModal</strong> action somewhere in our app (think: a Login button)!
 
-1. Basic Login Modal Component
+"1." Basic Login Modal Component
 
 > <img src="http://i.imgur.com/5DladXJ.png" width="100%" height="70%">
 
@@ -186,10 +186,10 @@ There a few important things to note here:
 * First, we are importing in the <strong>default Modal component</strong> we created in Step 1 of this blog. Just like any other React component, it can be reused anywhere! We will be rendering the Modal component and within it, the specific content of the modal - here, the login form!
 * Second, we have an <strong>onClose</strong> method defined here. Remember earlier I said this has to be passed in as a prop to the default Modal component for it to trigger the different methods to exit out of the modal (e.g., <strong>onOverlayClick</strong>). It is inside this onClose method that we will pass in our <strong>hideModal</strong> action-creator to set the store's modalType to `null` (which triggers the ModalContainer to render out no presentational component -- `if (!props.modalType) return null`).
 
-2. Login Button!
+"2." Login Button!
 
 <div class="message">
-    If you have separated your presentational components from your container components react-redux style, then what follows below will make sense. If you are unfamiliar with the presentation-container divide, the presentational component is merely receiving props from the container and handle all rendering.
+    If you have separated your presentational components from your container components react-redux style, then what follows below will make sense. If you are unfamiliar with the presentation-container divide, the presentational component is merely receiving props from the container and handles all rendering.
 </div>
 
 * NavBar Presentational Component
@@ -216,13 +216,13 @@ It harnesses React's principles of allowing you to pass down almost anything as 
 
 All we have to do is add a few lines to our default Modal component:
 
-> <img src="http://i.imgur.com/nfk7MH4.png" width="80%" height="80%">
+> <img src="http://i.imgur.com/nfk7MH4.png" width="100%" height="100%">
 
 Those three lines check if an <strong>overlayStyle</strong>, <strong>contentStyle</strong>, <strong>dialogStyle</strong> prop has been sent to the default Modal component. If so, it will overwrite any conflicting style in the corresponding `div` element.
 
 For example:
 
-> <img src="http://i.imgur.com/HFUoB0M.png" width="80%" height="80%">
+> <img src="http://i.imgur.com/HFUoB0M.png" width="100%" height="100%">
 
 Now we can first SET <strong>dialogStyle</strong> in our LoginModal component; here, setting our default Modal Component's Dialog Box element's `backgroundColor: black`. 
 
