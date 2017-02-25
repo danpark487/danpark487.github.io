@@ -1,209 +1,331 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>Lanyon</title>
+ <title>Dan Park</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-02-24T14:33:05-05:00</updated>
+ <updated>2017-02-24T19:12:09-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
-   <name>Mark Otto</name>
-   <email>markdotto@gmail.com</email>
+   <name>Daniel Park</name>
+   <email>danielpark.487@gmail.com</email>
  </author>
 
  
  <entry>
-   <title>Introducing Lanyon</title>
-   <link href="http://localhost:4000/2014/01/02/introducing-lanyon/"/>
-   <updated>2014-01-02T00:00:00-05:00</updated>
-   <id>http://localhost:4000/2014/01/02/introducing-lanyon</id>
-   <content type="html">&lt;p&gt;Lanyon is an unassuming &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; theme that places content first by tucking away navigation in a hidden drawer. It’s based on &lt;a href=&quot;http://getpoole.com&quot;&gt;Poole&lt;/a&gt;, the Jekyll butler.&lt;/p&gt;
+   <title>React Modals -- Scalable? Customizable? Neat Components?</title>
+   <link href="http://localhost:4000/2017/02/24/react-modals/"/>
+   <updated>2017-02-24T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2017/02/24/react-modals</id>
+   <content type="html">&lt;h3 id=&quot;why-should-you-care&quot;&gt;&lt;strong&gt;Why should you care?&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;h3 id=&quot;built-on-poole&quot;&gt;Built on Poole&lt;/h3&gt;
+&lt;p&gt;If you haven’t tried to implement modals in React, you wouldn’t understand the context of this blog. If you had, there is a chance you have wandered into some random novice JS developer’s blog (I’m talking about this one) because, quite frankly… there isn’t a whole lot of guidance re: modals in react. Of course, this isn’t to say that there aren’t ANY good resources on the subject out there… I certainly wouldn’t have gotten to where I am now without them. However, I found their implementations confusing (for a beginner like myself), conflicting, and/or vague.&lt;/p&gt;
 
-&lt;p&gt;Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by &lt;a href=&quot;https://twitter.com/mdo&quot;&gt;@mdo&lt;/a&gt;. Poole, and every theme built on it (like Lanyon here) includes the following:&lt;/p&gt;
-
+&lt;p&gt;BUT! Here are a collection of a few gems that I have found – where the rest of my blog is based heavily upon:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;Complete Jekyll setup included (layouts, config, &lt;a href=&quot;/404&quot;&gt;404&lt;/a&gt;, &lt;a href=&quot;/atom.xml&quot;&gt;RSS feed&lt;/a&gt;, posts, and &lt;a href=&quot;/about&quot;&gt;example page&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Mobile friendly design and development&lt;/li&gt;
-  &lt;li&gt;Easily scalable text and component sizing with &lt;code class=&quot;highlighter-rouge&quot;&gt;rem&lt;/code&gt; units in the CSS&lt;/li&gt;
-  &lt;li&gt;Support for a wide gamut of HTML elements&lt;/li&gt;
-  &lt;li&gt;Related posts (time-based, because Jekyll) below each post&lt;/li&gt;
-  &lt;li&gt;Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/35623656/how-can-i-display-a-modal-dialog-in-redux-that-performs-asynchronous-actions/35641680&quot;&gt;StackOverflow: Dan Abramov’s answer on how to implement modals with redux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codersmind.com/scalable-modals-react-redux/&quot;&gt;Scalable Modals with React and Redux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@david.gilbertson/modals-in-react-f6c3ff9f4701#.rrwqgz9e6&quot;&gt;Modals in React&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=WGjv-p9jYf0&quot;&gt;Youtube: [React] Modals in React and Redux Apps&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;lanyon-features&quot;&gt;Lanyon features&lt;/h3&gt;
+&lt;p&gt;I recommend you checking out those links – but you don’t have to.&lt;/p&gt;
 
-&lt;p&gt;In addition to the features of Poole, Lanyon adds the following:&lt;/p&gt;
+&lt;p&gt;It is mainly to prove a point… modals in React are a pain to implement… even if you use a library like &lt;a href=&quot;https://github.com/reactjs/react-modal&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;react-modal&lt;/code&gt;&lt;/a&gt; (sometimes there is too much abstraction).&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Toggleable sliding sidebar (built with only CSS) via &lt;strong&gt;☰&lt;/strong&gt; link in top corner&lt;/li&gt;
-  &lt;li&gt;Sidebar includes support for textual modules and a dynamically generated navigation with active link support&lt;/li&gt;
-  &lt;li&gt;Two orientations for content and sidebar, default (left sidebar) and &lt;a href=&quot;https://github.com/poole/lanyon#reverse-layout&quot;&gt;reverse&lt;/a&gt; (right sidebar), available via &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;body&amp;gt;&lt;/code&gt; classes&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/poole/lanyon#themes&quot;&gt;Eight optional color schemes&lt;/a&gt;, available via &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;body&amp;gt;&lt;/code&gt; classes&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h3 id=&quot;basics---what-are-modals&quot;&gt;&lt;strong&gt;Basics - What are modals?&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/poole/lanyon#readme&quot;&gt;Head to the readme&lt;/a&gt; to learn more.&lt;/p&gt;
-
-&lt;h3 id=&quot;browser-support&quot;&gt;Browser support&lt;/h3&gt;
-
-&lt;p&gt;Lanyon is by preference a forward-thinking project. In addition to the latest versions of Chrome, Safari (mobile and desktop), and Firefox, it is only compatible with Internet Explorer 9 and above.&lt;/p&gt;
-
-&lt;h3 id=&quot;download&quot;&gt;Download&lt;/h3&gt;
-
-&lt;p&gt;Lanyon is developed on and hosted with GitHub. Head to the &lt;a href=&quot;https://github.com/poole/lanyon&quot;&gt;GitHub repository&lt;/a&gt; for downloads, bug reports, and features requests.&lt;/p&gt;
-
-&lt;p&gt;Thanks!&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Example content</title>
-   <link href="http://localhost:4000/2014/01/01/example-content/"/>
-   <updated>2014-01-01T00:00:00-05:00</updated>
-   <id>http://localhost:4000/2014/01/01/example-content</id>
-   <content type="html">&lt;div class=&quot;message&quot;&gt;
-  Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
+&lt;div class=&quot;message&quot;&gt;
+  Note: if you already understand what modals are, and want to get to the meat of this post, then scroll down!
 &lt;/div&gt;
 
-&lt;p&gt;Cum sociis natoque penatibus et magnis &lt;a href=&quot;#&quot;&gt;dis parturient montes&lt;/a&gt;, nascetur ridiculus mus. &lt;em&gt;Aenean eu leo quam.&lt;/em&gt; Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.&lt;/p&gt;
+&lt;p&gt;In layman’s terms, modals are simply pop-up messages that you often see being used for Login/Registration, TOS, warning, etc. messages.&lt;/p&gt;
 
+&lt;p&gt;For example:&lt;/p&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.&lt;/p&gt;
+  &lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/800/1*5s21EnFDMOklJr8T9KIp2Q.png&quot; width=&quot;75%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Etiam porta &lt;strong&gt;sem malesuada magna&lt;/strong&gt; mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.&lt;/p&gt;
+&lt;p&gt;You’ve definitely seen these before and if you are anything like me, you might’ve even tried to implement one in a website.&lt;/p&gt;
 
-&lt;h2 id=&quot;inline-html-elements&quot;&gt;Inline HTML elements&lt;/h2&gt;
+&lt;div class=&quot;message&quot;&gt;
+  For the purposes of this blog post, I will only be speaking about modals in &lt;strong&gt;React&lt;/strong&gt;. I would not be surprised if it were easier to do in Angular, or some other framework.
+&lt;/div&gt;
 
-&lt;p&gt;HTML defines a long list of available inline tags, a complete list of which can be found on the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element&quot;&gt;Mozilla Developer Network&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In short, modals are simply “hacky” HTML/CSS views combined with some event-handlers.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;To bold text&lt;/strong&gt;, use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;strong&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;To italicize text&lt;/em&gt;, use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;em&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Abbreviations, like &lt;abbr title=&quot;HyperText Markup Langage&quot;&gt;HTML&lt;/abbr&gt; should use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;abbr&amp;gt;&lt;/code&gt;, with an optional &lt;code class=&quot;highlighter-rouge&quot;&gt;title&lt;/code&gt; attribute for the full phrase.&lt;/li&gt;
-  &lt;li&gt;Citations, like &lt;cite&gt;— Mark otto&lt;/cite&gt;, should use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;cite&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;del&gt;Deleted&lt;/del&gt; text should use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;del&amp;gt;&lt;/code&gt; and &lt;ins&gt;inserted&lt;/ins&gt; text should use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ins&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Superscript &lt;sup&gt;text&lt;/sup&gt; uses &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;sup&amp;gt;&lt;/code&gt; and subscript &lt;sub&gt;text&lt;/sub&gt; uses &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;sub&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;I write “hacky” in quotes because messing around with HTML and CSS seems like something we shouldn’t do much of in React. But with modals, it’s &lt;strong&gt;unavoidable&lt;/strong&gt;. If you &lt;strong&gt;hate&lt;/strong&gt; CSS, turn around and forget about modals altogether before it’s too late. But remember, you will never have a cool login pop-up suited to your design tastes. :)&lt;/p&gt;
 
-&lt;p&gt;Most of these elements are styled by browsers with few modifications on our part.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Back on topic:&lt;/strong&gt;
+Modals are a rendering of some HTML elements with certain CSS classes &lt;em&gt;triggered&lt;/em&gt; by some event-handler on a button, link, or whatever. Basically, you click a button, the pop-up is rendered on your screen! The magic is that the website you were just on does not go away! You can still see the page you were just on behind the pop-up!&lt;/p&gt;
 
-&lt;h2 id=&quot;heading&quot;&gt;Heading&lt;/h2&gt;
-
-&lt;p&gt;Vivamus sagittis lacus vel augue rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.&lt;/p&gt;
-
-&lt;h3 id=&quot;code&quot;&gt;Code&lt;/h3&gt;
-
-&lt;p&gt;Cum sociis natoque penatibus et magnis dis &lt;code class=&quot;highlighter-rouge&quot;&gt;code element&lt;/code&gt; montes, nascetur ridiculus mus.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Example can be run directly in your JavaScript console
-&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Create a function that takes two arguments and returns the sum of those arguments
-&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;return a + b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Call the function
-&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// &amp;gt; 8&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.&lt;/p&gt;
-
-&lt;h3 id=&quot;lists&quot;&gt;Lists&lt;/h3&gt;
-
-&lt;p&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Praesent commodo cursus magna, vel scelerisque nisl consectetur et.&lt;/li&gt;
-  &lt;li&gt;Donec id elit non mi porta gravida at eget metus.&lt;/li&gt;
-  &lt;li&gt;Nulla vitae elit libero, a pharetra augue.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.&lt;/p&gt;
-
+&lt;p&gt;There are three major HTML elements rendered when the modal pops up:&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;Vestibulum id ligula porta felis euismod semper.&lt;/li&gt;
-  &lt;li&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.&lt;/li&gt;
-  &lt;li&gt;Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/li&gt;
+  &lt;li&gt;An &lt;strong&gt;Overlay&lt;/strong&gt; - typically a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element with a class that creates a “shadow” effect over the document while the modal is onscreen.&lt;/li&gt;
+  &lt;li&gt;A &lt;strong&gt;Content Box&lt;/strong&gt; - another &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element with a class that provides the position context for the dialog/modal box (#3).&lt;/li&gt;
+  &lt;li&gt;A &lt;strong&gt;Dialog/Modal Box&lt;/strong&gt; - yet another &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element with a class that resizes itself to the content of the modal.
+    &lt;blockquote&gt;
+      &lt;p&gt;Just think of these as three layers, one on top of another.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.&lt;/p&gt;
+&lt;p&gt;That’s it! That’s the skeleton of a basic modal. However, the real challenge is how to make a re-usable modal with customizable design inside your React application.&lt;/p&gt;
 
-&lt;dl&gt;
-  &lt;dt&gt;HyperText Markup Language (HTML)&lt;/dt&gt;
-  &lt;dd&gt;The language used to describe and define the content of a Web page&lt;/dd&gt;
+&lt;h3 id=&quot;why-something-seemingly-simple-becomes-hard-with-react&quot;&gt;&lt;strong&gt;Why Something Seemingly Simple Becomes Hard With React&lt;/strong&gt;&lt;/h3&gt;
 
-  &lt;dt&gt;Cascading Style Sheets (CSS)&lt;/dt&gt;
-  &lt;dd&gt;Used to describe the appearance of Web content&lt;/dd&gt;
+&lt;div class=&quot;message&quot;&gt;
+    Important: The rest of this post will assume you have a solid grasp of how components are often structured in react with redux (and react-redux).
+&lt;/div&gt;
 
-  &lt;dt&gt;JavaScript (JS)&lt;/dt&gt;
-  &lt;dd&gt;The programming language used to build advanced Web sites and applications&lt;/dd&gt;
-&lt;/dl&gt;
+&lt;p&gt;If you checked out the suggested links at the top of this post, you may be feeling what I did when I first tried to understand what they were talking about. Huh? As a beginner, it only raised a host of questions like, ‘So where do I put the ModalRoot in my routes?’, ‘How should I connect it with my redux store?’, ‘Can I customize the default template modals?’, and so on and so forth…&lt;/p&gt;
 
-&lt;p&gt;Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.&lt;/p&gt;
+&lt;p&gt;Here is what I want my modal to do (and what you probably want as well!):&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Reusable&lt;/strong&gt; - &lt;em&gt;I do not want to create the HTML/CSS for every modal I put into my app. Who does?&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Scalable&lt;/strong&gt; - &lt;em&gt;I want my modals to be rendered from a centralized location for organization purposes.&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Redux-ified&lt;/strong&gt; - &lt;em&gt;I want to connect my modal to my redux store because I may want to pass props down.&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Customizable&lt;/strong&gt; - &lt;em&gt;I don’t want all my modals to look the same.&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;h3 id=&quot;tables&quot;&gt;Tables&lt;/h3&gt;
+&lt;p&gt;We will take these one-by-one below. Whee!&lt;/p&gt;
 
-&lt;p&gt;Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+&lt;h3 id=&quot;1-reusable---make-a-default-modal-component&quot;&gt;&lt;strong&gt;1. Reusable - make a default Modal component!&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Upvotes&lt;/th&gt;
-      &lt;th&gt;Downvotes&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tfoot&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Totals&lt;/td&gt;
-      &lt;td&gt;21&lt;/td&gt;
-      &lt;td&gt;23&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tfoot&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Alice&lt;/td&gt;
-      &lt;td&gt;10&lt;/td&gt;
-      &lt;td&gt;11&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Bob&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Charlie&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Want to see something else added? &lt;a href=&quot;https://github.com/poole/poole/issues/new&quot;&gt;Open an issue.&lt;/a&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>What's Jekyll?</title>
-   <link href="http://localhost:4000/2013/12/31/whats-jekyll/"/>
-   <updated>2013-12-31T00:00:00-05:00</updated>
-   <id>http://localhost:4000/2013/12/31/whats-jekyll</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From &lt;a href=&quot;https://github.com/mojombo/jekyll/blob/master/README.markdown&quot;&gt;the project’s readme&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;You could import in a nice package like &lt;a href=&quot;https://github.com/reactjs/react-modal&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;react-modal&lt;/code&gt;&lt;/a&gt; to do this for you, but you won’t have as much control over its customization and/or its connection to the redux store. But it’s up to you!&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Jekyll is a simple, blog aware, static site generator. It takes a template directory […] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.&lt;/p&gt;
+  &lt;p&gt;There is a lot of boilerplate that you can just copy and paste, but I will explain why the boilerplate is important!&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;It’s an immensely useful tool and one we encourage you to use here with Lanyon.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;You will need to create a class for your default Modal component.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/FOYy6D2.png&quot; width=&quot;100%&quot; height=&quot;70%&quot; /&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Find out more by &lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;visiting the project on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The rendered portion of the default Modal component is what I mentioned earlier, namely the three HTML elements (Overlay, Content Box, Dialog Box) and their CSS classes that render the Modal.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You can ignore the methods and style props being passed through the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; elements for now.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You will need to give default CSS classes to the elements.
+The corresponding CSS is more boilerplate as well (presumably inserted into your custom css file):&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/7ts1rmq.png&quot; width=&quot;50%&quot; height=&quot;65%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;strong&gt;Overlay&lt;/strong&gt; class has a high z-index that places itself over the current page. It covers the entirety of the page and its color is set to black with the opacity set to .65. Obviously, you could change that if you wish.&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;Content Box&lt;/strong&gt; class has an even higher z-index placed on top of the overlay. It also covers the page and it provides positioning context for its child Dialog Box.&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;Dialog Box&lt;/strong&gt; class, as a child to the &lt;strong&gt;Content Box&lt;/strong&gt;, has its position relative to the Content Box. Anything that goes inside the Dialog Box (your actual modal content), will resize the Dialog Box accordingly.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Last but not least, the Modal methods! (more boilerplate)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/uhgDlGI.png&quot; width=&quot;100%&quot; height=&quot;75%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;These methods allow user input to create expected default actions.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;listenKeyboard&lt;/strong&gt; “listens” to the user keyboard to see if they have pressed “ESC” while the modal is open. If so, the modal closes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;onOverlayClick&lt;/strong&gt; means that if you click on the overlay (outside the Modal Dialog Box), it will close the modal (an expected outcome).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;onDialogClick&lt;/strong&gt; simply prevents the closing of the modal when you click within the Dialog Box (because it will close when you click the Overlay that covers the whole page at a lower z-index). If this confuses you, try disabling it and testing the modal – you will see why this is necessary!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    &lt;strong&gt;Very Important!&lt;/strong&gt; If you note, these methods take in an &lt;strong&gt;onClose&lt;/strong&gt; method to cause the Modal to close! In other words, if an &lt;strong&gt;onClose&lt;/strong&gt; method is NOT passed into the Modal component as a prop, your modal will not close as expected! 
+
+    But we see how that's done below :)
+&lt;/div&gt;
+
+&lt;p&gt;These methods are passed through the respective &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt;s to give you the… Full Modal Experience. We still haven’t touched on the customized styles (which we will touch upon last).&lt;/p&gt;
+
+&lt;p&gt;Now, you have created your default Modal component! You can now import this modal anywhere in your App for use!&lt;/p&gt;
+
+&lt;h3 id=&quot;2-scalable---create-a-modalroot-container&quot;&gt;&lt;strong&gt;2. Scalable - create a ModalRoot container&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;If your website anticipates more than a single kind of modal (e.g., Login Modal, Warning Modal, Registration Modal, Terms of Services Modal, etc.), it may be wise to separate the presentational modal component from a container that handles which presentational component ought to be rendered.&lt;/p&gt;
+
+&lt;p&gt;The following code will do just that!&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/tKKeH4N.png&quot; width=&quot;100%&quot; height=&quot;75%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;At first glance, this may be a bit confusing, but we will take it step by step. It is also difficult to read and understand this snippet without the proper context (e.g., what is being passed in, where are all these things located).&lt;/p&gt;
+
+&lt;p&gt;Things to note:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;We are importing all the unique modal components into this container! (e.g., LoginModal, WarningModal, etc.)&lt;/li&gt;
+  &lt;li&gt;We have constants imported in for all the different modal types because this Modal Container is connected to the store and will be receiving a prop as &lt;code class=&quot;highlighter-rouge&quot;&gt;props.modalType&lt;/code&gt; (via &lt;code class=&quot;highlighter-rouge&quot;&gt;mapStateToProps&lt;/code&gt;) to figure out which modal to render.&lt;/li&gt;
+  &lt;li&gt;The MODAL_COMPONENTS object maps each modal component to their respective modalType (from the redux store).&lt;/li&gt;
+  &lt;li&gt;Lastly, the ModalContainer will receive &lt;code class=&quot;highlighter-rouge&quot;&gt;props&lt;/code&gt; and checks if the store has a specific modalType in mind to be rendered; if no modalType is set in the store, nothing is rendered from the container. However, if there IS a modalType set on the store, then the ModalContainer will check the MODAL_COMPONENTS object, grab the corresponding modal and render that out.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This way, you have a predictable location (container) from which all your different modals will be rendered!&lt;/p&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    It is understandable to be confused at this point, because we have not covered the redux portion yet, but since that's up next, we will perhaps get a better sense of how this all comes together!
+&lt;/div&gt;
+
+&lt;h3 id=&quot;3-redux-ified---connect-it-to-the-store-as-a-child-of-the-app-component&quot;&gt;&lt;strong&gt;3. Redux-ified - connect it to the store as a child of the App component&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;First things first, we need to somehow connect this ModalContainer to someplace so that it will be rendered on our HTML! Right now, the ModalContainer and its soon-to-be-rendered Modal Components are out in limbo. Where should we anchor it?&lt;/p&gt;
+
+&lt;p&gt;There is a whole debate on where best to do this. But I’ll cut to the chase – it is best here.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/llaZgqz.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Why? Because it avoids the messyness of having to pull in &lt;em&gt;another&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;Provider&lt;/code&gt; from &lt;code class=&quot;highlighter-rouge&quot;&gt;react-redux&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;ReactDom.render&lt;/code&gt; to connect to the store and attaching a new element directly to the &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; file. Don’t understand that? It really doesn’t matter because you don’t need to!&lt;/p&gt;
+
+&lt;p&gt;Anyways, if you look at the image above, the App component is the parent to the ModalContainer. The App component is the parent component to all other components, as seen below:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/BpHMG9P.png&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I am using &lt;code class=&quot;highlighter-rouge&quot;&gt;react-router&lt;/code&gt; here… and ignore my other routes. The main point is that the App component is the parent component to everything else!&lt;/p&gt;
+
+&lt;p&gt;Next, all the routes are connected to the redux store via the &lt;code class=&quot;highlighter-rouge&quot;&gt;Provider&lt;/code&gt; (react-redux) as follows:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/1CQPpc6.png&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This way, you should not have to modify your routes in any way, you do not have to touch the &lt;code class=&quot;highlighter-rouge&quot;&gt;ReactDOM.render&lt;/code&gt; in your index.js (or wherever you are connecting your app to the redux store). You only have to add a single line in your parent App component!&lt;/p&gt;
+
+&lt;p&gt;Lastly, we have to create some actions and a reducer to handle those actions in the store!&lt;/p&gt;
+
+&lt;p&gt;There are only &lt;strong&gt;two&lt;/strong&gt; must-have actions you have to set up for your modals:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/muN4EVu.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I am using thunk middleware for my redux store (but you don’t need it, or have to know anything about it… I’m just using it for my app).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;SHOW MODAL&lt;/strong&gt; - takes in a modalType to set the modalType in the store.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;HIDE MODAL&lt;/strong&gt; - simply an action that will set the modalType to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; in the store.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/vxXcAPG.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Here we see the reducer for the modals.&lt;/p&gt;
+
+&lt;p&gt;Initially, the store’s modalType is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;. However, once an &lt;strong&gt;showModal&lt;/strong&gt; action is dispatched from wherever in your app (with the desired modalType), it will set the store’s modalType to the desired modal. This will then trigger the &lt;code class=&quot;highlighter-rouge&quot;&gt;mapStateToProps&lt;/code&gt; in our ModalContainer (connected to the redux store via the &lt;code class=&quot;highlighter-rouge&quot;&gt;Provider&lt;/code&gt; as a child of the App component) and now we have &lt;code class=&quot;highlighter-rouge&quot;&gt;props.modalType&lt;/code&gt; set to the desired modal component. As a result, ModalContainer will render that desired Modal component!&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;hideModal&lt;/strong&gt; is also dispatched from your app and will set the store’s modalType back to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; (hiding the modal again).&lt;/p&gt;
+
+&lt;p&gt;Almost done!&lt;/p&gt;
+
+&lt;h3 id=&quot;bringing-it-all-together-almost&quot;&gt;&lt;strong&gt;Bringing it all together… almost!&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Bringing this together involves two things (1) creating your presentational modal component and (2) triggering the &lt;strong&gt;showModal&lt;/strong&gt; action somewhere in our app (think: a Login button)!&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Basic Login Modal Component&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/5DladXJ.png&quot; width=&quot;100%&quot; height=&quot;70%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;There a few important things to note here:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;First, we are importing in the &lt;strong&gt;default Modal component&lt;/strong&gt; we created in Step 1 of this blog. Just like any other React component, it can be reused anywhere! We will be rendering the Modal component and within it, the specific content of the modal - here, the login form!&lt;/li&gt;
+  &lt;li&gt;Second, we have an &lt;strong&gt;onClose&lt;/strong&gt; method defined here. Remember earlier I said this has to be passed in as a prop to the default Modal component for it to trigger the different methods to exit out of the modal (e.g., &lt;strong&gt;onOverlayClick&lt;/strong&gt;). It is inside this onClose method that we will pass in our &lt;strong&gt;hideModal&lt;/strong&gt; action-creator to set the store’s modalType to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; (which triggers the ModalContainer to render out no presentational component – &lt;code class=&quot;highlighter-rouge&quot;&gt;if (!props.modalType) return null&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Login Button!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    If you have separated your presentational components from your container components react-redux style, then what follows below will make sense. If you are unfamiliar with the presentation-container divide, the presentational component is merely receiving props from the container and handle all rendering.
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NavBar Presentational Component
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/HdPjD2k.png&quot; /&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here we see a very basic navigation bar for our app. It only contains a single LOGIN button. But as you can see, the button has a &lt;strong&gt;showLoginMenu&lt;/strong&gt; method (passed down from the container) that will be triggered once the button is clicked.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NavBar Container Component
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/XLxVcGi.png&quot; /&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here, we see how the presentational component receives the &lt;strong&gt;showLoginMenu&lt;/strong&gt; method. We imported the &lt;strong&gt;loadModal&lt;/strong&gt; action-creator and will invoke it within the &lt;strong&gt;showLoginMenu&lt;/strong&gt; method inside the NavBar Container &lt;strong&gt;with&lt;/strong&gt; the LOGIN_MODAL modalType!&lt;/p&gt;
+
+&lt;p&gt;This is very important. We are saying that once the button is clicked in our presentational component, it will dispatch the &lt;strong&gt;loadModal&lt;/strong&gt; action to the store with the LOGIN_MODAL modalType. It will set the store’s modalType to &lt;code class=&quot;highlighter-rouge&quot;&gt;LOGIN_MODAL&lt;/code&gt; and will trigger the ModalContainer to render the LoginModal via &lt;code class=&quot;highlighter-rouge&quot;&gt;const SpecificModal = MODAL_COMPONENTS[props.modalType]&lt;/code&gt;!&lt;/p&gt;
+
+&lt;p&gt;Now, if you click on that Login button, you will get your Login Modal popping up on your screen! If you click outside the modal or press ‘ESC’ it exits the modal too! Cool!&lt;/p&gt;
+
+&lt;p&gt;But what if you want to make some changes to the default Modal? What if you want it positioned differently, or with a different background?&lt;/p&gt;
+
+&lt;h3 id=&quot;4-customizable---pass-in-custom-styles-to-the-default-modal-component-to-overwrite-the-default-css&quot;&gt;&lt;strong&gt;4. Customizable - pass in custom styles to the default Modal component to overwrite the default CSS&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is a simple solution but is my way of handling customization for an otherwise boring default Modal.&lt;/p&gt;
+
+&lt;p&gt;It harnesses React’s principles of allowing you to pass down almost anything as a prop to the component and the &lt;code class=&quot;highlighter-rouge&quot;&gt;style&lt;/code&gt; property inside a component that can overwrite any default CSS.&lt;/p&gt;
+
+&lt;p&gt;All we have to do is add a few lines to our default Modal component:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/nfk7MH4.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Those three lines check if an &lt;strong&gt;overlayStyle&lt;/strong&gt;, &lt;strong&gt;contentStyle&lt;/strong&gt;, &lt;strong&gt;dialogStyle&lt;/strong&gt; prop has been sent to the default Modal component. If so, it will overwrite any conflicting style in the corresponding &lt;code class=&quot;highlighter-rouge&quot;&gt;div&lt;/code&gt; element.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/HFUoB0M.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now we can first SET &lt;strong&gt;dialogStyle&lt;/strong&gt; in our LoginModal component; here, setting our default Modal Component’s Dialog Box element’s &lt;code class=&quot;highlighter-rouge&quot;&gt;backgroundColor: black&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Then, we can pass &lt;strong&gt;dialogStyle&lt;/strong&gt; down as a prop to the default Modal Component! The Modal Component will receive the prop, and overwrite the default &lt;code class=&quot;highlighter-rouge&quot;&gt;backgroundColor&lt;/code&gt; of our Dialog Box!&lt;/p&gt;
+
+&lt;p&gt;Hence, we get customization without losing reusability! You don’t need to create a whole new Modal Component with its default methods like &lt;strong&gt;onOverlayClick&lt;/strong&gt;. Instead, only deal with the CSS.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Sidenote:&lt;/strong&gt; There may be detractors from this way of customizing our modals. It feels very hacky to set our custom styles this way. However, as I said above, react modals feel hacky altogether. It involves a lot of CSS manipulation to get what you want. Because React allows its developers to pass style in as a prop (which it handles and renders), it seems like a good compromise between what would otherwise be a boring one-style modal (scalable, but not customizable) and a highly-customizable modal (customizable, but not very scalable).&lt;/p&gt;
+
+&lt;h3 id=&quot;in-conclusion&quot;&gt;In Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Modals are very fun to use and makes websites feel seamless. However, as we have explored above, the implementation isn’t quite so seamless. However, this is primarily because we were concerned with making our modals in our app scalable and customizable using redux! There is so little guidance on this specific topic that I felt the need to air out my findings and my solutions to a rather complex problem.&lt;/p&gt;
+
+&lt;p&gt;I must give credit to the links I referenced above – particularly Mike Vercoelen’s post: &lt;a href=&quot;https://codersmind.com/scalable-modals-react-redux/&quot;&gt;Scalable Modals with React and Redux&lt;/a&gt;. Much of my code is copy-and-pasted from his (apart from how we handled the CSS). Hopefully my detailed overview was as helpful as it has been verbose.&lt;/p&gt;
+
+&lt;p&gt;Good luck!&lt;/p&gt;
 </content>
  </entry>
  
