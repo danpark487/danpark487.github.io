@@ -71,8 +71,20 @@ You could import in a nice package like <a href="https://github.com/reactjs/reac
 
 > There is a lot of boilerplate that you can just copy and paste, but I will explain why the boilerplate is important!
 
-* You will need to create a class for your default Modal component.
-> <img src="http://i.imgur.com/FOYy6D2.png" width="100%" height="90%">
+* You will need to create a class for your default Modal component. 
+
+{% highlight language %}
+return (
+    <div>
+        <div className="modal-overlay-div" style={overlayStyle} />
+        <div className="modal-content-div" style={contentStyle} onClick={this.onOverlayClick.bind(this)}>
+            <div className="modal-dialog-div" style={dialogStyle} onClick={this.onDialogClick}>
+                {this.props.children}
+            </div>
+        </div>
+    </div>
+);
+{% endhighlight %}
 
 The rendered portion of the default Modal component is what I mentioned earlier, namely the three HTML elements (Overlay, Content Box, Dialog Box) and their CSS classes that render the Modal. 
 
@@ -81,7 +93,52 @@ The rendered portion of the default Modal component is what I mentioned earlier,
 * You will need to give default CSS classes to the elements.
 The corresponding CSS is more boilerplate as well (presumably inserted into your custom css file):
 
-> <img src="http://i.imgur.com/7ts1rmq.png" width="50%" height="65%">
+{% highlight language %}
+.modal-overlay-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .65);
+}
+
+.modal-content-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    overflow: auto;
+    text-align: center;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.modal-content-div:after {
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+    margin-left: -.05em;
+    content: '';
+}
+
+.modal-dialog-div {
+    position: relative;
+    outline: 0;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    max-width: 520px;
+    cursor: default;
+    border-radius: 4px;
+}
+{% endhighlight %}
 
 The <strong>Overlay</strong> class has a high z-index that places itself over the current page. It covers the entirety of the page and its color is set to black with the opacity set to .65. Obviously, you could change that if you wish.
 
@@ -91,7 +148,33 @@ The <strong>Dialog Box</strong> class, as a child to the <strong>Content Box</st
 
 * Last but not least, the Modal methods! (more boilerplate)
 
-> <img src="http://i.imgur.com/uhgDlGI.png" width="100%" height="75%">
+{% highlight language %}
+listenKeyboard(event) {
+    if (event.key === 'Escape' || event.keyCode === 27) {
+            this.props.onClose();
+    }
+}
+
+componentDidMount() {
+    if (this.props.onClose) {
+            window.addEventListener('keydown', this.listenKeyboard.bind(this), true);
+    }
+}
+
+componentWillUnmount() {
+    if (this.props.onClose) {
+            window.removeEventListener('keydown', this.listenKeyboard.bind(this), true);
+    }
+}
+
+onOverlayClick() {
+    this.props.onClose();
+}
+
+onDialogClick(event) {
+    event.stopPropagation();
+}
+{% endhighlight %}
 
 These methods allow user input to create expected default actions. 
 
@@ -114,7 +197,40 @@ Now, you have created your default Modal component! You can now import this moda
 If your website anticipates more than a single kind of modal (e.g., Login Modal, Warning Modal, Registration Modal, Terms of Services Modal, etc.), it may be wise to separate the presentational modal component from a container that handles which presentational component ought to be rendered. 
 
 The following code will do just that!
-> <img src="http://i.imgur.com/tKKeH4N.png" width="100%" height="75%">
+{% highlight language %}
+import React from 'react';
+import { connect } from 'react-redux';
+
+/** Modal Components */
+import LoginModal from './components/LoginModal';
+import SignupModal from './components/SignupModal';
+
+/** Modal Type Constants */
+import { LOGIN_MODAL, SIGNUP_MODAL } from './modaltypes'; 
+
+const MODAL_COMPONENTS = {
+    LOGIN_MODAL: LoginModal,
+    SIGNUP_MODAL: SignupModal
+};
+
+const ModalContainer = (props) => {
+    if (!props.modalType) {
+        return null;
+    }
+
+    const SpecificModal = MODAL_COMPONENTS[props.modalType];
+
+    return <SpecificModal />;
+};
+
+const mapStateToProps = state => {
+    return {
+        modalType: state.modal.modalType
+    };
+};
+
+export default connect(mapStateToProps)(ModalContainer);
+{% endhighlight %}
 
 At first glance, this may be a bit confusing, but we will take it step by step. It is also difficult to read and understand this snippet without the proper context (e.g., what is being passed in, where are all these things located).
 
@@ -136,25 +252,83 @@ First things first, we need to somehow connect this ModalContainer to someplace 
 
 There is a whole debate on where best to do this. But I'll cut to the chase -- it is best here.
 
-> <img src="http://i.imgur.com/llaZgqz.png" width="80%" height="80%">
+{% highlight language %}
+import React from 'react';
+import NavBarContainer from '../containers/NavBarContainer';
+import ModalContainer from '../modals/ModalContainer';
+
+export default function App ({ children }) {
+    return (
+        <div id="main">
+            <NavBarContainer />
+            {children}
+            <ModalContainer />
+        </div>
+    );
+}
+{% endhighlight %}
 
 Why? Because it avoids the messyness of having to pull in <em>another</em> `Provider` from `react-redux` and `ReactDom.render` to connect to the store and attaching a new element directly to the `index.html` file. Don't understand that? It really doesn't matter because you don't need to!
 
 Anyways, if you look at the image above, the App component is the parent to the ModalContainer. The App component is the parent component to all other components, as seen below:
 
-> <img src="http://i.imgur.com/BpHMG9P.png">
+{% highlight language %}
+export function Root (props) {
+  return (
+      <Router history={browserHistory}>
+        <Route path="/" component={App} onEnter={props.onAppEnter}>
+          <Route .... nested routes here...
+        </Route>
+      </Router>
+  );
+}
+{% endhighlight %}
 
 I am using `react-router` here.
 
 Next, all the routes are connected to the redux store via the `Provider` (react-redux) as follows:
 
-> <img src="http://i.imgur.com/1CQPpc6.png" width="50%" height="50%">
+{% highlight language %}
+ReactDOM.render(
+  <Provider store={store}>
+    <Root />
+  </Provider>,
+  document.getElementById('app')
+);
+{% endhighlight %}
 
 Lastly, we have to create some actions and a reducer to handle those actions in the store!
 
 There are only <strong>two</strong> must-have actions you have to set up for your modals:
 
-> <img src="http://i.imgur.com/muN4EVu.png" width="80%" height="80%">
+{% highlight language %}
+/** Constants */
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
+
+/** Action-creators */
+const showingModal = (modalType) => {
+    return {
+        type: SHOW_MODAL,
+        modalType
+    };
+};
+
+const hidingModal = () => {
+    return {
+        type: HIDE_MODAL
+    };
+};
+
+/** Thunk actions */
+export const loadModal = (modalType) => {
+    return dispatch => dispatch(showingModal(modalType));
+};
+
+export const hideModal = () => {
+    return dispatch => dispatch(hidingModal());
+};
+{% endhighlight %}
 
 > I am using thunk middleware for my redux store (but you don't need it, or have to know anything about it... I'm just using it for my app).
 
@@ -162,7 +336,35 @@ There are only <strong>two</strong> must-have actions you have to set up for you
 
 2. <strong>HIDE_MODAL</strong> - simply an action that will set the modalType to `null` in the store.
 
-> <img src="http://i.imgur.com/vxXcAPG.png" width="80%" height="80%">
+{% highlight language %}
+/** Constant */
+import { SHOW_MODAL, HIDE_MODAL } from '../action-creators/modal';
+
+/** Initial State */
+const initialModalState = {
+    modalType: null
+};
+
+/** Modal reducer */
+export default function (state = initialModalState, action) {
+    const newState = Object.assign({}, state);
+
+    switch (action.type) {
+
+        case SHOW_MODAL:
+            newState.modalType = action.modalType;
+            break;
+
+        case HIDE_MODAL:
+            return initialModalState;
+
+        default:
+            return state;
+    }
+
+    return newState;
+}
+{% endhighlight %}
 
 Here we see the reducer for the modals.
 
@@ -178,7 +380,33 @@ Bringing this together involves two things (1) creating your presentational moda
 
 <strong>1. Basic Login Modal Component</strong>
 
-> <img src="http://i.imgur.com/5DladXJ.png" width="100%" height="70%">
+{% highlight language %}
+import { hideModal } from '../../action-creators/modal';
+import Modal from '../Modal';
+
+class LoginModal extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onClose = this.onClose.bind(this);
+    }
+
+    onClose() {
+        this.props.hideModal();
+    }
+
+    render() {
+        return (
+            <Modal onClose={this.onClose}>
+                <div className="login">
+                    <h1>Login</h1>
+                        <form ...login form...
+                    <br />
+                </div>
+            </Modal>
+        );
+    }
+}
+{% endhighlight %}
 
 There a few important things to note here:
 * First, we are importing in the <strong>default Modal component</strong> we created in Step 1 of this blog.
@@ -191,12 +419,50 @@ There a few important things to note here:
 </div>
 
 * NavBar Presentational Component
-> <img src="http://i.imgur.com/HdPjD2k.png">
+
+{% highlight language %}
+<ul className="nav navbar-nav navbar-right">
+    <li><a onClick={this.props.showLoginMenu}>LOGIN</a></li>
+</ul>
+{% endhighlight %}
 
 Here we see a very basic navigation bar for our app. It only contains a single LOGIN button. But as you can see, the button has a <strong>showLoginMenu</strong> method (passed down from the container) that will be triggered once the button is clicked.
 
 * NavBar Container Component 
-> <img src="http://i.imgur.com/XLxVcGi.png">
+{% highlight language %}
+/** Thunk actions */
+import { loadModal } from '../action-creators/modal';
+
+/** Modal Type Constant */
+import { LOGIN_MODAL } from '../modals/modaltypes';
+
+export class NavBarContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.showLoginMenu = this.showLoginMenu.bind(this);
+    }
+
+    showLoginMenu() {
+        this.props.loadModal(LOGIN_MODAL);
+    }
+
+    render() {
+        return (
+            <NavBar
+                showLoginMenu={this.showLoginMenu}
+            />
+        );
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        loadModal: modelType => dispatch(loadModal(modelType))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(NavBarContainer);
+{% endhighlight %}
 
 Here, we see how the presentational component receives the <strong>showLoginMenu</strong> method. We imported the <strong>loadModal</strong> action-creator and will invoke it within the <strong>showLoginMenu</strong> method inside the NavBar Container <strong>with</strong> the LOGIN_MODAL modalType! 
 
@@ -214,13 +480,44 @@ It harnesses React's principles of allowing you to pass down almost anything as 
 
 All we have to do is add a few lines to our default Modal component:
 
-> <img src="http://i.imgur.com/nfk7MH4.png" width="100%" height="100%">
+{% highlight language %}
+render() {
+    const overlayStyle = this.props.overlayStyle ? this.props.overlayStyle : {};
+    const contentStyle = this.props.contentStyle ? this.props.contentStyle : {};
+    const dialogStyle = this.props.dialogStyle ? this.props.dialogStyle : {};
+    return (
+        <div>
+            <div className="modal-overlay-div" style={overlayStyle} />
+            <div className="modal-content-div" style={contentStyle} onClick={this.onOverlayClick.bind(this)}>
+                <div className="modal-dialog-div" style={dialogStyle} onClick={this.onDialogClick}>
+                    {this.props.children}
+                </div>
+            </div>
+        </div>
+    );
+}
+{% endhighlight %}
 
 Those three lines check if an <strong>overlayStyle</strong>, <strong>contentStyle</strong>, <strong>dialogStyle</strong> prop has been sent to the default Modal component. If so, it will overwrite any conflicting style in the corresponding `div` element.
 
 For example:
 
-> <img src="http://i.imgur.com/HFUoB0M.png" width="100%" height="100%">
+{% highlight language %}
+render() {
+    const dialogStyle = {
+        backgroundColor: 'black'
+    };
+    return (
+        <Modal onClose={this.onClose} dialogStyle={dialogStyle}>
+            <div className="login">
+                <h1>Login</h1>
+                    <form ...login form...
+                <br />
+            </div>
+        </Modal>
+    );
+}
+{% endhighlight %}
 
 Now we can first SET <strong>dialogStyle</strong> in our LoginModal component; here, setting our default Modal Component's Dialog Box element's `backgroundColor: black`. 
 

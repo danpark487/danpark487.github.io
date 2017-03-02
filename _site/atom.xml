@@ -4,7 +4,7 @@
  <title>Dan Park</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-02-24T19:12:09-05:00</updated>
+ <updated>2017-03-02T18:53:55-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Daniel Park</name>
@@ -21,7 +21,7 @@
 
 &lt;p&gt;If you haven’t tried to implement modals in React, you wouldn’t understand the context of this blog. If you had, there is a chance you have wandered into some random novice JS developer’s blog (I’m talking about this one) because, quite frankly… there isn’t a whole lot of guidance re: modals in react. Of course, this isn’t to say that there aren’t ANY good resources on the subject out there… I certainly wouldn’t have gotten to where I am now without them. However, I found their implementations confusing (for a beginner like myself), conflicting, and/or vague.&lt;/p&gt;
 
-&lt;p&gt;BUT! Here are a collection of a few gems that I have found – where the rest of my blog is based heavily upon:&lt;/p&gt;
+&lt;p&gt;BUT! Here is a collection of a few gems that I have found – where the rest of my blog is based heavily upon:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/35623656/how-can-i-display-a-modal-dialog-in-redux-that-performs-asynchronous-actions/35641680&quot;&gt;StackOverflow: Dan Abramov’s answer on how to implement modals with redux&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://codersmind.com/scalable-modals-react-redux/&quot;&gt;Scalable Modals with React and Redux&lt;/a&gt;&lt;/li&gt;
@@ -29,17 +29,17 @@
   &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=WGjv-p9jYf0&quot;&gt;Youtube: [React] Modals in React and Redux Apps&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I recommend you checking out those links – but you don’t have to.&lt;/p&gt;
+&lt;p&gt;I recommend checking out those links – but you don’t have to.&lt;/p&gt;
 
 &lt;p&gt;It is mainly to prove a point… modals in React are a pain to implement… even if you use a library like &lt;a href=&quot;https://github.com/reactjs/react-modal&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;react-modal&lt;/code&gt;&lt;/a&gt; (sometimes there is too much abstraction).&lt;/p&gt;
 
 &lt;h3 id=&quot;basics---what-are-modals&quot;&gt;&lt;strong&gt;Basics - What are modals?&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;div class=&quot;message&quot;&gt;
-  Note: if you already understand what modals are, and want to get to the meat of this post, then scroll down!
+  Note: if you already understand what modals are, and want to get to the meat of this post, then scroll past this section!
 &lt;/div&gt;
 
-&lt;p&gt;In layman’s terms, modals are simply pop-up messages that you often see being used for Login/Registration, TOS, warning, etc. messages.&lt;/p&gt;
+&lt;p&gt;In layman’s terms, modals are simply pop-up messages that you often see being used for Login/Registration, TOS, warning, etc.&lt;/p&gt;
 
 &lt;p&gt;For example:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -49,7 +49,7 @@
 &lt;p&gt;You’ve definitely seen these before and if you are anything like me, you might’ve even tried to implement one in a website.&lt;/p&gt;
 
 &lt;div class=&quot;message&quot;&gt;
-  For the purposes of this blog post, I will only be speaking about modals in &lt;strong&gt;React&lt;/strong&gt;. I would not be surprised if it were easier to do in Angular, or some other framework.
+  For the purposes of this blog post, I will only be speaking about modals in &lt;strong&gt;React&lt;/strong&gt;. I wouldn't be surprised if it were easier to do in Angular, or some other framework.
 &lt;/div&gt;
 
 &lt;p&gt;In short, modals are simply “hacky” HTML/CSS views combined with some event-handlers.&lt;/p&gt;
@@ -57,7 +57,7 @@
 &lt;p&gt;I write “hacky” in quotes because messing around with HTML and CSS seems like something we shouldn’t do much of in React. But with modals, it’s &lt;strong&gt;unavoidable&lt;/strong&gt;. If you &lt;strong&gt;hate&lt;/strong&gt; CSS, turn around and forget about modals altogether before it’s too late. But remember, you will never have a cool login pop-up suited to your design tastes. :)&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Back on topic:&lt;/strong&gt;
-Modals are a rendering of some HTML elements with certain CSS classes &lt;em&gt;triggered&lt;/em&gt; by some event-handler on a button, link, or whatever. Basically, you click a button, the pop-up is rendered on your screen! The magic is that the website you were just on does not go away! You can still see the page you were just on behind the pop-up!&lt;/p&gt;
+Modals are a rendering of some HTML elements with certain CSS classes &lt;em&gt;triggered&lt;/em&gt; by some event-handler on a button, link, or whatever. Basically, you click a button, the pop-up is rendered on your screen! The magic is that the website you were just on does not go away! You can still see the page behind the pop-up!&lt;/p&gt;
 
 &lt;p&gt;There are three major HTML elements rendered when the modal pops up:&lt;/p&gt;
 &lt;ol&gt;
@@ -78,11 +78,11 @@ Modals are a rendering of some HTML elements with certain CSS classes &lt;em&gt;
     Important: The rest of this post will assume you have a solid grasp of how components are often structured in react with redux (and react-redux).
 &lt;/div&gt;
 
-&lt;p&gt;If you checked out the suggested links at the top of this post, you may be feeling what I did when I first tried to understand what they were talking about. Huh? As a beginner, it only raised a host of questions like, ‘So where do I put the ModalRoot in my routes?’, ‘How should I connect it with my redux store?’, ‘Can I customize the default template modals?’, and so on and so forth…&lt;/p&gt;
+&lt;p&gt;If you are anything like me, checking out the links above might have led to more confusion.&lt;/p&gt;
 
 &lt;p&gt;Here is what I want my modal to do (and what you probably want as well!):&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Reusable&lt;/strong&gt; - &lt;em&gt;I do not want to create the HTML/CSS for every modal I put into my app. Who does?&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reusable&lt;/strong&gt; - &lt;em&gt;I don’t want to create the HTML/CSS for every modal I put into my app. Who does?&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Scalable&lt;/strong&gt; - &lt;em&gt;I want my modals to be rendered from a centralized location for organization purposes.&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Redux-ified&lt;/strong&gt; - &lt;em&gt;I want to connect my modal to my redux store because I may want to pass props down.&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Customizable&lt;/strong&gt; - &lt;em&gt;I don’t want all my modals to look the same.&lt;/em&gt;&lt;/li&gt;
@@ -99,12 +99,19 @@ Modals are a rendering of some HTML elements with certain CSS classes &lt;em&gt;
 &lt;/blockquote&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;You will need to create a class for your default Modal component.
-    &lt;blockquote&gt;
-      &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/FOYy6D2.png&quot; width=&quot;100%&quot; height=&quot;70%&quot; /&gt;&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
+  &lt;li&gt;You will need to create a class for your default Modal component.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;return (
+    &amp;lt;div&amp;gt;
+        &amp;lt;div className=&quot;modal-overlay-div&quot; style={overlayStyle} /&amp;gt;
+        &amp;lt;div className=&quot;modal-content-div&quot; style={contentStyle} onClick={this.onOverlayClick.bind(this)}&amp;gt;
+            &amp;lt;div className=&quot;modal-dialog-div&quot; style={dialogStyle} onClick={this.onDialogClick}&amp;gt;
+                {this.props.children}
+            &amp;lt;/div&amp;gt;
+        &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+);&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The rendered portion of the default Modal component is what I mentioned earlier, namely the three HTML elements (Overlay, Content Box, Dialog Box) and their CSS classes that render the Modal.&lt;/p&gt;
 
@@ -117,9 +124,50 @@ Modals are a rendering of some HTML elements with certain CSS classes &lt;em&gt;
 The corresponding CSS is more boilerplate as well (presumably inserted into your custom css file):&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/7ts1rmq.png&quot; width=&quot;50%&quot; height=&quot;65%&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;.modal-overlay-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .65);
+}
+
+.modal-content-div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    overflow: auto;
+    text-align: center;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.modal-content-div:after {
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+    margin-left: -.05em;
+    content: '';
+}
+
+.modal-dialog-div {
+    position: relative;
+    outline: 0;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    max-width: 520px;
+    cursor: default;
+    border-radius: 4px;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The &lt;strong&gt;Overlay&lt;/strong&gt; class has a high z-index that places itself over the current page. It covers the entirety of the page and its color is set to black with the opacity set to .65. Obviously, you could change that if you wish.&lt;/p&gt;
 
@@ -131,9 +179,31 @@ The corresponding CSS is more boilerplate as well (presumably inserted into your
   &lt;li&gt;Last but not least, the Modal methods! (more boilerplate)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/uhgDlGI.png&quot; width=&quot;100%&quot; height=&quot;75%&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;listenKeyboard(event) {
+    if (event.key === 'Escape' || event.keyCode === 27) {
+            this.props.onClose();
+    }
+}
+
+componentDidMount() {
+    if (this.props.onClose) {
+            window.addEventListener('keydown', this.listenKeyboard.bind(this), true);
+    }
+}
+
+componentWillUnmount() {
+    if (this.props.onClose) {
+            window.removeEventListener('keydown', this.listenKeyboard.bind(this), true);
+    }
+}
+
+onOverlayClick() {
+    this.props.onClose();
+}
+
+onDialogClick(event) {
+    event.stopPropagation();
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;These methods allow user input to create expected default actions.&lt;/p&gt;
 
@@ -158,13 +228,43 @@ The corresponding CSS is more boilerplate as well (presumably inserted into your
 &lt;p&gt;If your website anticipates more than a single kind of modal (e.g., Login Modal, Warning Modal, Registration Modal, Terms of Services Modal, etc.), it may be wise to separate the presentational modal component from a container that handles which presentational component ought to be rendered.&lt;/p&gt;
 
 &lt;p&gt;The following code will do just that!&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/tKKeH4N.png&quot; width=&quot;100%&quot; height=&quot;75%&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;import React from 'react';
+import { connect } from 'react-redux';
+
+/** Modal Components */
+import LoginModal from './components/LoginModal';
+import SignupModal from './components/SignupModal';
+
+/** Modal Type Constants */
+import { LOGIN_MODAL, SIGNUP_MODAL } from './modaltypes'; 
+
+const MODAL_COMPONENTS = {
+    LOGIN_MODAL: LoginModal,
+    SIGNUP_MODAL: SignupModal
+};
+
+const ModalContainer = (props) =&amp;gt; {
+    if (!props.modalType) {
+        return null;
+    }
+
+    const SpecificModal = MODAL_COMPONENTS[props.modalType];
+
+    return &amp;lt;SpecificModal /&amp;gt;;
+};
+
+const mapStateToProps = state =&amp;gt; {
+    return {
+        modalType: state.modal.modalType
+    };
+};
+
+export default connect(mapStateToProps)(ModalContainer);&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;At first glance, this may be a bit confusing, but we will take it step by step. It is also difficult to read and understand this snippet without the proper context (e.g., what is being passed in, where are all these things located).&lt;/p&gt;
 
-&lt;p&gt;Things to note:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Things to note:&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;We are importing all the unique modal components into this container! (e.g., LoginModal, WarningModal, etc.)&lt;/li&gt;
   &lt;li&gt;We have constants imported in for all the different modal types because this Modal Container is connected to the store and will be receiving a prop as &lt;code class=&quot;highlighter-rouge&quot;&gt;props.modalType&lt;/code&gt; (via &lt;code class=&quot;highlighter-rouge&quot;&gt;mapStateToProps&lt;/code&gt;) to figure out which modal to render.&lt;/li&gt;
@@ -184,35 +284,75 @@ The corresponding CSS is more boilerplate as well (presumably inserted into your
 
 &lt;p&gt;There is a whole debate on where best to do this. But I’ll cut to the chase – it is best here.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/llaZgqz.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;import React from 'react';
+import NavBarContainer from '../containers/NavBarContainer';
+import ModalContainer from '../modals/ModalContainer';
+
+export default function App ({ children }) {
+    return (
+        &amp;lt;div id=&quot;main&quot;&amp;gt;
+            &amp;lt;NavBarContainer /&amp;gt;
+            {children}
+            &amp;lt;ModalContainer /&amp;gt;
+        &amp;lt;/div&amp;gt;
+    );
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Why? Because it avoids the messyness of having to pull in &lt;em&gt;another&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;Provider&lt;/code&gt; from &lt;code class=&quot;highlighter-rouge&quot;&gt;react-redux&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;ReactDom.render&lt;/code&gt; to connect to the store and attaching a new element directly to the &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; file. Don’t understand that? It really doesn’t matter because you don’t need to!&lt;/p&gt;
 
 &lt;p&gt;Anyways, if you look at the image above, the App component is the parent to the ModalContainer. The App component is the parent component to all other components, as seen below:&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/BpHMG9P.png&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;export function Root (props) {
+  return (
+      &amp;lt;Router history={browserHistory}&amp;gt;
+        &amp;lt;Route path=&quot;/&quot; component={App} onEnter={props.onAppEnter}&amp;gt;
+          &amp;lt;Route .... nested routes here...
+        &amp;lt;/Route&amp;gt;
+      &amp;lt;/Router&amp;gt;
+  );
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;I am using &lt;code class=&quot;highlighter-rouge&quot;&gt;react-router&lt;/code&gt; here… and ignore my other routes. The main point is that the App component is the parent component to everything else!&lt;/p&gt;
+&lt;p&gt;I am using &lt;code class=&quot;highlighter-rouge&quot;&gt;react-router&lt;/code&gt; here.&lt;/p&gt;
 
 &lt;p&gt;Next, all the routes are connected to the redux store via the &lt;code class=&quot;highlighter-rouge&quot;&gt;Provider&lt;/code&gt; (react-redux) as follows:&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/1CQPpc6.png&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This way, you should not have to modify your routes in any way, you do not have to touch the &lt;code class=&quot;highlighter-rouge&quot;&gt;ReactDOM.render&lt;/code&gt; in your index.js (or wherever you are connecting your app to the redux store). You only have to add a single line in your parent App component!&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;ReactDOM.render(
+  &amp;lt;Provider store={store}&amp;gt;
+    &amp;lt;Root /&amp;gt;
+  &amp;lt;/Provider&amp;gt;,
+  document.getElementById('app')
+);&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Lastly, we have to create some actions and a reducer to handle those actions in the store!&lt;/p&gt;
 
 &lt;p&gt;There are only &lt;strong&gt;two&lt;/strong&gt; must-have actions you have to set up for your modals:&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/muN4EVu.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;/** Constants */
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
+
+/** Action-creators */
+const showingModal = (modalType) =&amp;gt; {
+    return {
+        type: SHOW_MODAL,
+        modalType
+    };
+};
+
+const hidingModal = () =&amp;gt; {
+    return {
+        type: HIDE_MODAL
+    };
+};
+
+/** Thunk actions */
+export const loadModal = (modalType) =&amp;gt; {
+    return dispatch =&amp;gt; dispatch(showingModal(modalType));
+};
+
+export const hideModal = () =&amp;gt; {
+    return dispatch =&amp;gt; dispatch(hidingModal());
+};&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;I am using thunk middleware for my redux store (but you don’t need it, or have to know anything about it… I’m just using it for my app).&lt;/p&gt;
@@ -220,16 +360,40 @@ The corresponding CSS is more boilerplate as well (presumably inserted into your
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;SHOW MODAL&lt;/strong&gt; - takes in a modalType to set the modalType in the store.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;SHOW_MODAL&lt;/strong&gt; - takes in a modalType to set the modalType in the store.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;HIDE MODAL&lt;/strong&gt; - simply an action that will set the modalType to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; in the store.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;HIDE_MODAL&lt;/strong&gt; - simply an action that will set the modalType to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; in the store.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/vxXcAPG.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;/** Constant */
+import { SHOW_MODAL, HIDE_MODAL } from '../action-creators/modal';
+
+/** Initial State */
+const initialModalState = {
+    modalType: null
+};
+
+/** Modal reducer */
+export default function (state = initialModalState, action) {
+    const newState = Object.assign({}, state);
+
+    switch (action.type) {
+
+        case SHOW_MODAL:
+            newState.modalType = action.modalType;
+            break;
+
+        case HIDE_MODAL:
+            return initialModalState;
+
+        default:
+            return state;
+    }
+
+    return newState;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Here we see the reducer for the modals.&lt;/p&gt;
 
@@ -243,49 +407,96 @@ The corresponding CSS is more boilerplate as well (presumably inserted into your
 
 &lt;p&gt;Bringing this together involves two things (1) creating your presentational modal component and (2) triggering the &lt;strong&gt;showModal&lt;/strong&gt; action somewhere in our app (think: a Login button)!&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Basic Login Modal Component&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;1. Basic Login Modal Component&lt;/strong&gt;&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/5DladXJ.png&quot; width=&quot;100%&quot; height=&quot;70%&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;import { hideModal } from '../../action-creators/modal';
+import Modal from '../Modal';
+
+class LoginModal extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onClose = this.onClose.bind(this);
+    }
+
+    onClose() {
+        this.props.hideModal();
+    }
+
+    render() {
+        return (
+            &amp;lt;Modal onClose={this.onClose}&amp;gt;
+                &amp;lt;div className=&quot;login&quot;&amp;gt;
+                    &amp;lt;h1&amp;gt;Login&amp;lt;/h1&amp;gt;
+                        &amp;lt;form ...login form...
+                    &amp;lt;br /&amp;gt;
+                &amp;lt;/div&amp;gt;
+            &amp;lt;/Modal&amp;gt;
+        );
+    }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;There a few important things to note here:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;First, we are importing in the &lt;strong&gt;default Modal component&lt;/strong&gt; we created in Step 1 of this blog. Just like any other React component, it can be reused anywhere! We will be rendering the Modal component and within it, the specific content of the modal - here, the login form!&lt;/li&gt;
-  &lt;li&gt;Second, we have an &lt;strong&gt;onClose&lt;/strong&gt; method defined here. Remember earlier I said this has to be passed in as a prop to the default Modal component for it to trigger the different methods to exit out of the modal (e.g., &lt;strong&gt;onOverlayClick&lt;/strong&gt;). It is inside this onClose method that we will pass in our &lt;strong&gt;hideModal&lt;/strong&gt; action-creator to set the store’s modalType to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; (which triggers the ModalContainer to render out no presentational component – &lt;code class=&quot;highlighter-rouge&quot;&gt;if (!props.modalType) return null&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;First, we are importing in the &lt;strong&gt;default Modal component&lt;/strong&gt; we created in Step 1 of this blog.&lt;/li&gt;
+  &lt;li&gt;Second, we have an &lt;strong&gt;onClose&lt;/strong&gt; method defined here. Remember earlier I said this has to be passed in as a prop to the default Modal component for it to trigger the different methods to exit out of the modal (e.g., &lt;strong&gt;onOverlayClick&lt;/strong&gt;). It is inside this onClose method that we will pass in our &lt;strong&gt;hideModal&lt;/strong&gt; action-creator to set the store’s modalType to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Login Button!&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;2. Login Button!&lt;/strong&gt;&lt;/p&gt;
 
 &lt;div class=&quot;message&quot;&gt;
-    If you have separated your presentational components from your container components react-redux style, then what follows below will make sense. If you are unfamiliar with the presentation-container divide, the presentational component is merely receiving props from the container and handle all rendering.
+    If you have separated your presentational components from your container components react-redux style, then what follows below will make sense. If you are unfamiliar with the presentation-container divide, the presentational component is merely receiving props from the container and handles all rendering.
 &lt;/div&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;NavBar Presentational Component
-    &lt;blockquote&gt;
-      &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/HdPjD2k.png&quot; /&gt;&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
+  &lt;li&gt;NavBar Presentational Component&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;&amp;lt;ul className=&quot;nav navbar-nav navbar-right&quot;&amp;gt;
+    &amp;lt;li&amp;gt;&amp;lt;a onClick={this.props.showLoginMenu}&amp;gt;LOGIN&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Here we see a very basic navigation bar for our app. It only contains a single LOGIN button. But as you can see, the button has a &lt;strong&gt;showLoginMenu&lt;/strong&gt; method (passed down from the container) that will be triggered once the button is clicked.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;NavBar Container Component
-    &lt;blockquote&gt;
-      &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/XLxVcGi.png&quot; /&gt;&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
+  &lt;li&gt;NavBar Container Component&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;/** Thunk actions */
+import { loadModal } from '../action-creators/modal';
+
+/** Modal Type Constant */
+import { LOGIN_MODAL } from '../modals/modaltypes';
+
+export class NavBarContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.showLoginMenu = this.showLoginMenu.bind(this);
+    }
+
+    showLoginMenu() {
+        this.props.loadModal(LOGIN_MODAL);
+    }
+
+    render() {
+        return (
+            &amp;lt;NavBar
+                showLoginMenu={this.showLoginMenu}
+            /&amp;gt;
+        );
+    }
+}
+
+const mapDispatchToProps = dispatch =&amp;gt; {
+    return {
+        loadModal: modelType =&amp;gt; dispatch(loadModal(modelType))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(NavBarContainer);&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Here, we see how the presentational component receives the &lt;strong&gt;showLoginMenu&lt;/strong&gt; method. We imported the &lt;strong&gt;loadModal&lt;/strong&gt; action-creator and will invoke it within the &lt;strong&gt;showLoginMenu&lt;/strong&gt; method inside the NavBar Container &lt;strong&gt;with&lt;/strong&gt; the LOGIN_MODAL modalType!&lt;/p&gt;
 
-&lt;p&gt;This is very important. We are saying that once the button is clicked in our presentational component, it will dispatch the &lt;strong&gt;loadModal&lt;/strong&gt; action to the store with the LOGIN_MODAL modalType. It will set the store’s modalType to &lt;code class=&quot;highlighter-rouge&quot;&gt;LOGIN_MODAL&lt;/code&gt; and will trigger the ModalContainer to render the LoginModal via &lt;code class=&quot;highlighter-rouge&quot;&gt;const SpecificModal = MODAL_COMPONENTS[props.modalType]&lt;/code&gt;!&lt;/p&gt;
+&lt;p&gt;This is very important. We are saying that once the button is clicked in our presentational component, it will set the store’s modalType to &lt;code class=&quot;highlighter-rouge&quot;&gt;LOGIN_MODAL&lt;/code&gt; and will trigger the ModalContainer to render the LoginModal via &lt;code class=&quot;highlighter-rouge&quot;&gt;const SpecificModal = MODAL_COMPONENTS[props.modalType]&lt;/code&gt;!&lt;/p&gt;
 
 &lt;p&gt;Now, if you click on that Login button, you will get your Login Modal popping up on your screen! If you click outside the modal or press ‘ESC’ it exits the modal too! Cool!&lt;/p&gt;
 
@@ -299,17 +510,40 @@ The corresponding CSS is more boilerplate as well (presumably inserted into your
 
 &lt;p&gt;All we have to do is add a few lines to our default Modal component:&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/nfk7MH4.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;render() {
+    const overlayStyle = this.props.overlayStyle ? this.props.overlayStyle : {};
+    const contentStyle = this.props.contentStyle ? this.props.contentStyle : {};
+    const dialogStyle = this.props.dialogStyle ? this.props.dialogStyle : {};
+    return (
+        &amp;lt;div&amp;gt;
+            &amp;lt;div className=&quot;modal-overlay-div&quot; style={overlayStyle} /&amp;gt;
+            &amp;lt;div className=&quot;modal-content-div&quot; style={contentStyle} onClick={this.onOverlayClick.bind(this)}&amp;gt;
+                &amp;lt;div className=&quot;modal-dialog-div&quot; style={dialogStyle} onClick={this.onDialogClick}&amp;gt;
+                    {this.props.children}
+                &amp;lt;/div&amp;gt;
+            &amp;lt;/div&amp;gt;
+        &amp;lt;/div&amp;gt;
+    );
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Those three lines check if an &lt;strong&gt;overlayStyle&lt;/strong&gt;, &lt;strong&gt;contentStyle&lt;/strong&gt;, &lt;strong&gt;dialogStyle&lt;/strong&gt; prop has been sent to the default Modal component. If so, it will overwrite any conflicting style in the corresponding &lt;code class=&quot;highlighter-rouge&quot;&gt;div&lt;/code&gt; element.&lt;/p&gt;
 
 &lt;p&gt;For example:&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;http://i.imgur.com/HFUoB0M.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-language&quot; data-lang=&quot;language&quot;&gt;render() {
+    const dialogStyle = {
+        backgroundColor: 'black'
+    };
+    return (
+        &amp;lt;Modal onClose={this.onClose} dialogStyle={dialogStyle}&amp;gt;
+            &amp;lt;div className=&quot;login&quot;&amp;gt;
+                &amp;lt;h1&amp;gt;Login&amp;lt;/h1&amp;gt;
+                    &amp;lt;form ...login form...
+                &amp;lt;br /&amp;gt;
+            &amp;lt;/div&amp;gt;
+        &amp;lt;/Modal&amp;gt;
+    );
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Now we can first SET &lt;strong&gt;dialogStyle&lt;/strong&gt; in our LoginModal component; here, setting our default Modal Component’s Dialog Box element’s &lt;code class=&quot;highlighter-rouge&quot;&gt;backgroundColor: black&lt;/code&gt;.&lt;/p&gt;
 
